@@ -16,7 +16,7 @@ class NathanService extends Chart {
 
     public constructor(scope: Construct, config: NathanServiceConfig) {
         super(scope, `${GITHUB_REPOSITORY}-${NAMESPACE}`);
-        const metadata: ApiObjectMetadata = {};
+        const metadata: ApiObjectMetadata = config;
         const deployment = new Deployment(this, "deployment", {
             metadata,
             containers: [{
