@@ -1,0 +1,24 @@
+name: Publish Production Image
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  push-release:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout Main
+        uses: actions/checkout@main
+
+      - name: Publish Image
+        uses: elgohr/Publish-Docker-Github-Action@v4
+        with:
+          registry: ghcr.io
+          name: {{<PROJECT_OWNER>}}/{{<PROJECT_NAME>}}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          tag_names: true
+          tag_semver: true
