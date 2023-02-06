@@ -1,6 +1,6 @@
-import {ApiObjectMetadata, App, Chart} from "cdk8s";
+import {ApiObjectMetadata, App, Chart, Size} from "cdk8s";
 import {Construct} from "constructs";
-import {Deployment, Ingress, IngressBackend, Service} from "cdk8s-plus-24";
+import {Cpu, Deployment, Ingress, IngressBackend, Service} from "cdk8s-plus-24";
 
 const GITHUB_OWNER: string = "nfcopier";
 const GITHUB_REPOSITORY: string = "portfolio-web-gui";
@@ -19,8 +19,19 @@ class NathanService extends Chart {
         const metadata: ApiObjectMetadata = config;
         const deployment = new Deployment(this, "deployment", {
             metadata,
+            replicas: 1,
             containers: [{
-                image: `ghr.io/${GITHUB_OWNER}/${GITHUB_REPOSITORY}:${TAG}`
+                image: `ghr.io/${GITHUB_OWNER}/${GITHUB_REPOSITORY}:${TAG}`,
+                resources: {
+                    cpu: {
+                        request: Cpu.millis(100),
+                        limit: Cpu.millis(200)
+                    },
+                    memory: {
+                        request: Size.mebibytes(75),
+                        limit: Size.mebibytes(150)
+                    }
+                }
             }]
         });
         const service = new Service(this, "service", {
@@ -43,7 +54,7 @@ class NathanService extends Chart {
 
 const app = new App();
 new NathanService(app, {
-    name: "web-ui",
+    name: "web-gui",
     namespace: "index"
 });
 app.synth();
