@@ -1,5 +1,5 @@
 {
-  "name": "@{{<PROJECT_OWNER>}}/{{<PROJECT_NAME>}}",
+  "name": "@nfcopier/portfolio-web-gui",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {

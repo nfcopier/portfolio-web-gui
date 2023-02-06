@@ -2,8 +2,8 @@ import {ApiObjectMetadata, App, Chart} from "cdk8s";
 import {Construct} from "constructs";
 import {Deployment, Ingress, IngressBackend, Service} from "cdk8s-plus-24";
 
-const GITHUB_OWNER: string = {{<PROJECT_OWNER>}};
-const GITHUB_REPOSITORY: string = {{<PROJECT_NAME>}}
+const GITHUB_OWNER: string = nfcopier;
+const GITHUB_REPOSITORY: string = portfolio-web-gui
 const NAMESPACE: string = "index"
 const TAG: string = process.argv[2];
 
