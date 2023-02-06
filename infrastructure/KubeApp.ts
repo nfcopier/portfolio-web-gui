@@ -21,7 +21,7 @@ class NathanService extends Chart {
             metadata,
             replicas: 1,
             containers: [{
-                image: `ghr.io/${GITHUB_OWNER}/${GITHUB_REPOSITORY}:${TAG}`,
+                image: `ghcr.io/${GITHUB_OWNER}/${GITHUB_REPOSITORY}:${TAG}`,
                 resources: {
                     cpu: {
                         request: Cpu.millis(100),
