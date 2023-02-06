@@ -32,7 +32,10 @@ class NathanService extends Chart {
                         limit: Size.mebibytes(150)
                     }
                 }
-            }]
+            }],
+            securityContext: {
+                ensureNonRoot: false
+            }
         });
         const service = new Service(this, "service", {
             metadata,
