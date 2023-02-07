@@ -42,10 +42,7 @@ class NathanService extends Chart {
         });
         const service = new Service(this, "service", {
             type: ServiceType.NODE_PORT,
-            metadata: {
-                name: metadata.name,
-                namespace: "nginx-system"
-            },
+            metadata,
             selector: deployment,
             ports: [{
                 port: 80,
@@ -53,7 +50,11 @@ class NathanService extends Chart {
             }]
         });
         new Ingress(this, "ingress", {
-            metadata,
+            metadata: {
+                name: metadata.name,
+                namespace: "nginx-system",
+                annotations: {"kubernetes.io/ingress.class": "nginx"}
+            },
             rules: [{
                 backend: IngressBackend.fromService(service),
                 path: `/${config.namespace}/${config.name}`
