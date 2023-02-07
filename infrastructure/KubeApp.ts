@@ -41,7 +41,6 @@ class NathanService extends Chart {
             }]
         });
         const service = new Service(this, "service", {
-            type: ServiceType.NODE_PORT,
             metadata,
             selector: deployment,
             ports: [{
@@ -50,12 +49,9 @@ class NathanService extends Chart {
             }]
         });
         new Ingress(this, "ingress", {
-            metadata: {
-                name: metadata.name,
-                namespace: "nginx-system"
-            },
+            metadata,
             rules: [{
-                host: "104.200.27.45",
+                host: "104-200-27-45.ip.linodeusercontent.com",
                 backend: IngressBackend.fromService(service),
                 path: `/${config.namespace}/${config.name}`
             }]
