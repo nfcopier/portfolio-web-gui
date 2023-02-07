@@ -31,11 +31,11 @@ class NathanService extends Chart {
                         request: Size.mebibytes(75),
                         limit: Size.mebibytes(150)
                     }
+                },
+                securityContext: {
+                    user: 12345
                 }
-            }],
-            securityContext: {
-                ensureNonRoot: false
-            }
+            }]
         });
         const service = new Service(this, "service", {
             metadata,
