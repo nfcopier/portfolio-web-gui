@@ -49,7 +49,10 @@ class NathanService extends Chart {
             }]
         });
         new Ingress(this, "ingress", {
-            metadata,
+            metadata: {
+                name: metadata.name,
+                namespace: "nginx-system"
+            },
             rules: [{
                 host: "104-200-27-45.ip.linodeusercontent.com",
                 backend: IngressBackend.fromService(service),
