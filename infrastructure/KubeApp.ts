@@ -46,7 +46,10 @@ class NathanService extends Chart {
             }]
         });
         new Ingress(this, "ingress", {
-            metadata,
+            metadata: {
+                name: "web-gui",
+                namespace: "nginx-system"
+            },
             rules: [{
                 backend: IngressBackend.fromService(service),
                 path: `/${config.namespace}/${config.name}`
