@@ -52,10 +52,10 @@ class NathanService extends Chart {
         new Ingress(this, "ingress", {
             metadata: {
                 name: metadata.name,
-                namespace: "nginx-system",
-                annotations: {"kubernetes.io/ingress.class": "nginx"}
+                namespace: "nginx-system"
             },
             rules: [{
+                host: "104.200.27.45",
                 backend: IngressBackend.fromService(service),
                 path: `/${config.namespace}/${config.name}`
             }]
