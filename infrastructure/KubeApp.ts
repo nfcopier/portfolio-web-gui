@@ -33,7 +33,7 @@ class NathanService extends Chart {
                     }
                 },
                 securityContext: {
-                    user: 12345
+                    ensureNonRoot: false
                 }
             }]
         });
