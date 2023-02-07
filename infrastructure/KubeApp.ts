@@ -1,6 +1,6 @@
 import {ApiObjectMetadata, App, Chart, Size} from "cdk8s";
 import {Construct} from "constructs";
-import {Cpu, Deployment, Ingress, IngressBackend, Service} from "cdk8s-plus-24";
+import {Cpu, Deployment, Ingress, IngressBackend, Service, ServiceType} from "cdk8s-plus-24";
 
 const GITHUB_OWNER: string = "nfcopier";
 const GITHUB_REPOSITORY: string = "portfolio-web-gui";
@@ -41,6 +41,7 @@ class NathanService extends Chart {
             }]
         });
         const service = new Service(this, "service", {
+            type: ServiceType.NODE_PORT,
             metadata,
             selector: deployment,
             ports: [{
