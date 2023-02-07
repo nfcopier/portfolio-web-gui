@@ -1,4 +1,5 @@
 const Express = require("express");
+import {Response} from "express";
 
 export class App {
 
@@ -10,7 +11,7 @@ export class App {
     }
 
     public configureRoutes(): void {
-        this.server.get("/", (res) => {
+        this.server.get("/", (req, res: Response) => {
             res.send("Hello world!");
         });
     }
