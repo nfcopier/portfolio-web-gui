@@ -22,6 +22,9 @@ class NathanService extends Chart {
             replicas: 1,
             containers: [{
                 image: `ghcr.io/${GITHUB_OWNER}/${GITHUB_REPOSITORY}:${TAG}`,
+                ports: [{
+                    number: 5000
+                }],
                 resources: {
                     cpu: {
                         request: Cpu.millis(100),
@@ -46,10 +49,7 @@ class NathanService extends Chart {
             }]
         });
         new Ingress(this, "ingress", {
-            metadata: {
-                name: "web-gui",
-                namespace: "nginx-system"
-            },
+            metadata,
             rules: [{
                 backend: IngressBackend.fromService(service),
                 path: `/${config.namespace}/${config.name}`
