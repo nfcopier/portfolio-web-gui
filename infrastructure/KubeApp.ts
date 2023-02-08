@@ -73,7 +73,7 @@ class NathanService extends Chart {
             rules: [{
                 host: "104-200-27-45.ip.linodeusercontent.com",
                 backend: IngressBackend.fromService(service),
-                path: `/${config.namespace}/${config.name}`
+                path: `/${config.namespace}/${config.name}/*`
             }]
         });
     }
