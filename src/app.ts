@@ -11,7 +11,7 @@ export class App {
     }
 
     public configureRoutes(): void {
-        this.server.get("/", (req, res: Response) => {
+        this.server.get("/index/web-gui", (req, res: Response) => {
             res.send("Hello world!");
         });
     }
