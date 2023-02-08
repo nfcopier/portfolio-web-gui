@@ -40,25 +40,28 @@ class NathanService extends Chart {
                 }
             }]
         });
-        new Service(this, "service", {
-            metadata,
+        const service = new Service(this, "service", {
+            metadata: {
+                name: metadata.name,
+                namespace: "nginx-system"
+            },
             selector: deployment,
             ports: [{
                 port: 80,
                 targetPort: 5000
             }]
         });
-        const service = new Service(this, "service-ingress", {
-            metadata: {
-                name: `${config.name}-${config.namespace}`,
-                namespace: "nginx-system"
-            },
-            type: ServiceType.EXTERNAL_NAME,
-            externalName: `${config.name}.${config.namespace}.svc.cluster.local`,
-            ports: [{
-                port: 80
-            }]
-        });
+        // new Service(this, "service-ingress", {
+        //     metadata: {
+        //         name: `${config.name}-${config.namespace}`,
+        //         namespace: "nginx-system"
+        //     },
+        //     type: ServiceType.EXTERNAL_NAME,
+        //     externalName: `${config.name}.${config.namespace}.svc.cluster.local`,
+        //     ports: [{
+        //         port: 80
+        //     }]
+        // });
         new Ingress(this, "ingress", {
             metadata: {
                 name: metadata.name,
