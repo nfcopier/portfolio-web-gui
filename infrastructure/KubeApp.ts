@@ -41,10 +41,7 @@ class NathanService extends Chart {
             }]
         });
         const service = new Service(this, "service", {
-            metadata: {
-                name: metadata.name,
-                namespace: "nginx-system"
-            },
+            metadata,
             selector: deployment,
             ports: [{
                 port: 80,
