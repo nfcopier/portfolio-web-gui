@@ -54,12 +54,18 @@ class NathanService extends Chart {
                 namespace: "nginx-system"
             },
             type: ServiceType.EXTERNAL_NAME,
-            externalName: `${config.name}.${config.namespace}.svc.cluster.local`
+            externalName: `${config.name}.${config.namespace}.svc.cluster.local`,
+            ports: [{
+                port: 80
+            }]
         });
         new Ingress(this, "ingress", {
             metadata: {
                 name: metadata.name,
-                namespace: "nginx-system"
+                namespace: "nginx-system",
+                annotations: {
+                    "kubernetes.io/ingress.class": "nginx"
+                }
             },
             rules: [{
                 host: "104-200-27-45.ip.linodeusercontent.com",
