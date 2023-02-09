@@ -60,11 +60,28 @@ class NathanService extends Chart {
         //         port: 80
         //     }]
         // });
+        new Ingress(this, "ingress-master", {
+            metadata: {
+                name: "ingress-master",
+                namespace: "nginx-system"
+            },
+            annotations: {
+                "kubernetes.io/ingress.class": "nginx",
+                "nginx.org/mergeable-ingress-type": "master"
+            },
+            // @ts-ignore
+            rules: [{
+                host: "104-200-27-45.ip.linodeusercontent.com"
+            }]
+        });
         new Ingress(this, "ingress", {
             metadata: {
-                ...metadata,
+                metadata: {
+                    ...metadata
+                },
                 annotations: {
-                    "kubernetes.io/ingress.class": "nginx"
+                    "kubernetes.io/ingress.class": "nginx",
+                    "nginx.org/mergeable-ingress-type": "minion"
                 }
             },
             rules: [{
@@ -79,6 +96,6 @@ class NathanService extends Chart {
 const app = new App();
 new NathanService(app, {
     name: "web-gui",
-    namespace: "nginx-system"
+    namespace: "index"
 });
 app.synth();
