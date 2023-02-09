@@ -41,6 +41,7 @@ class NathanService extends Chart {
             }]
         });
         const service = new Service(this, "service", {
+            type: ServiceType.NODE_PORT,
             metadata,
             selector: deployment,
             ports: [{
@@ -49,11 +50,11 @@ class NathanService extends Chart {
             }]
         });
         // new Service(this, "service-ingress", {
+        //     type: ServiceType.EXTERNAL_NAME,
         //     metadata: {
         //         name: `${config.name}-${config.namespace}`,
         //         namespace: "nginx-system"
         //     },
-        //     type: ServiceType.EXTERNAL_NAME,
         //     externalName: `${config.name}.${config.namespace}.svc.cluster.local`,
         //     ports: [{
         //         port: 80
@@ -61,8 +62,7 @@ class NathanService extends Chart {
         // });
         new Ingress(this, "ingress", {
             metadata: {
-                name: metadata.name,
-                namespace: "nginx-system",
+                ...metadata,
                 annotations: {
                     "kubernetes.io/ingress.class": "nginx"
                 }
@@ -70,7 +70,7 @@ class NathanService extends Chart {
             rules: [{
                 host: "104-200-27-45.ip.linodeusercontent.com",
                 backend: IngressBackend.fromService(service),
-                path: `/${config.namespace}/${config.name}/*`
+                path: `/`
             }]
         });
     }
@@ -79,6 +79,6 @@ class NathanService extends Chart {
 const app = new App();
 new NathanService(app, {
     name: "web-gui",
-    namespace: "index"
+    namespace: "nginx-system"
 });
 app.synth();

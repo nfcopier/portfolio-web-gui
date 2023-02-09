@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
+    "synth": "ts-node infrastructure/KubeApp.ts",
     "init": "ts-node scripts/InitProject.ts",
     "build": "tsc",
     "start": "node ."
